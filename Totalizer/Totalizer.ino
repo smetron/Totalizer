@@ -5,7 +5,7 @@
 
 Preferences preferences;
 
-#define DEVICE_NAME         "Valve_2408"
+#define DEVICE_NAME         "Pump_1234"
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
@@ -22,7 +22,6 @@ typedef struct {
 variable_t variable{ 0, 0 };
 
 BLECharacteristic* pCharacteristic;
-
 
 
 extern "C" {
@@ -121,7 +120,12 @@ class MyCallbacks : public BLECharacteristicCallbacks {
                     digitalWrite(2, HIGH);
                 }
 
-                if(value[i] == '2')
+                if (value[i] == '2') {
+                    pinMode(2, OUTPUT);
+                    digitalWrite(2, LOW);
+                }
+
+                if(value[i] == '3')
                 {
                     ResetCounter();
                 }
